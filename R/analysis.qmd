@@ -1,0 +1,191 @@
+---
+title: "Research Analysis Notebook"
+---
+
+```{r}
+#| label: setup
+#| include: false
+library(here)
+library(recipes)
+library(caret)
+source(here("utils","check_packages.R"))
+source(here("utils","functions.R"))
+```
+
+```{r}
+#load in data
+load(here("data","data_constructed","analytical_data.RData"))
+
+train_data$smoking <- factor(ifelse(train_data$smoking == 0, "non_Smoking", "Smoking"))
+
+
+#blueprint
+
+blueprint <- recipe(
+  x = train_data,
+  vars = colnames(train_data),
+  roles = c('ID', rep('predictor', 22), 'outcome')) %>%
+  step_zv(all_numeric()) %>%
+             step_nzv(all_numeric()) %>%
+             step_normalize(all_numeric_predictors())
+blueprint
+```
+
+```{r}
+loc      <- sample(1:nrow(train_data), round(nrow(train_data) * 0.9))
+train_data  <- train_data[loc, ]
+test_data  <- train_data[-loc, ]
+
+dim(train_data)
+
+dim(test_data)
+```
+
+```{r}
+# Randomly shuffle the training dataset
+
+  set.seed(11042022) # for reproducibility
+
+  train_data = train_data[sample(nrow(train_data)),]
+
+# Create 10 folds with equal size
+
+  folds = cut(seq(1,nrow(train_data)),breaks=10,labels=FALSE)
+  
+# Create the list for each fold 
+      
+  my.indices <- vector('list',10)
+
+  for(i in 1:10){
+    my.indices[[i]] <- which(folds!=i)
+  }
+```
+
+```{r}
+cv <- trainControl(method          = "cv",
+                   index           = my.indices,
+                   classProbs      = TRUE,
+                   summaryFunction = mnLogLoss)
+```
+
+```{r}
+caret_mod <- caret::train(blueprint, 
+                          data      = train_data, 
+                          method    = "glm",
+                          family    = 'binomial',
+                          metric    = 'logLoss',
+                          trControl = cv)
+
+caret_mod
+```
+
+```{r}
+
+```
+
+```{r}
+
+# performance evaluation
+predicted_test <- predict(caret_mod, test_data, type='prob')
+
+# View the updated test dataset
+head(predicted_test)
+```
+
+```{r}
+install.packages("cutpointr")
+require(cutpointr)
+```
+
+```{r}
+# Compute the AUC
+
+cut.obj <- cutpointr(x     = predicted_test$Smoking,
+                     class = test_data$smoking)
+
+auc(cut.obj)
+```
+
+```{r}
+
+
+```
+
+```{r}
+# Hyperparameter tuning grid for ridge penalty (lambda), alpha = 0
+
+grid <- data.frame(alpha = 0, lambda = c(seq(0,.001,.00001),.005,.01,.05,.1)) 
+grid
+```
+
+```{r}
+Sys.time()
+
+caret_logistic_ridge <- caret::train(blueprint, 
+                                     data      = train_data, 
+                                     method    = "glmnet",
+                                     family    = 'binomial',
+                                     metric    = 'logLoss',
+                                     trControl = cv,
+                                     tuneGrid  = grid)
+
+Sys.time()
+```
+
+```{r}
+#| label: fig-logistic-ridge
+plot(caret_logistic_ridge)
+```
+
+```{r}
+# Optimal lambda penalty
+
+caret_logistic_ridge$bestTune
+```
+
+```{r}
+predicted_te <- predict(caret_logistic_ridge, test_data, type='prob')
+
+dim(predicted_te)
+
+head(predicted_te)
+```
+
+```{r}
+# Compute the AUC
+
+cut.obj <- cutpointr(x     = predicted_te$Smoking,
+                     class = test_data$smoking)
+
+auc(cut.obj)
+```
+
+```{r}
+
+```
+
+```{r}
+# Hyperparameter tuning grid for lasso penalty (lambda), alpha = 1
+
+grid <- data.frame(alpha = 1, lambda = seq(0,.001,.00001)) 
+grid
+```
+
+```{r}
+Sys.time()
+
+caret_logistic_lasso <- caret::train(blueprint, 
+                                     data      = train_data, 
+                                     method    = "glmnet",
+                                     family    = 'binomial',
+                                     metric    = 'logLoss',
+                                     trControl = cv,
+                                     tuneGrid  = grid)
+
+Sys.time()
+```
+
+```{r}
+#| label: fig-logistic-lasso
+plot(caret_logistic_lasso)
+```

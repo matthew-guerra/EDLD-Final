@@ -1,0 +1,26 @@
+---
+title: "Organize Data Notebook"
+---
+
+```{r}
+#| label: setup
+#| include: false
+library(here)
+source(here("utils","check_packages.R"))
+source(here("utils","functions.R"))
+```
+
+```{r}
+train_data <- read.csv("~/EDLD Final/Smoker Status Using Bio-Signals/data/data_raw/train.csv")
+```
+
+```{r}
+save(train_data, file=here("data","data_constructed"
+                                ,"analytical_data.RData"))
+```
+
+```{r}
+
+```
+
+s
