@@ -1,7 +1,7 @@
 ---
 title: "Using Bio Signals to Predict Smoker Status"
 shorttitle: "Predicting Smoker Status"
-abstract: 
+abstract: This project focuses on the use of classification models to predict the smoking status of individuals based on diverse health indicators. With over 16 million Americans currently afflicted by diseases associated with smoking, there is an increased interest in the ability to use data science and machine learning models in public health. The application of this model in public health is particularly valuable for identifying correlations between specific biosignals and smoking status. Such insights contribute to a deeper understanding of the individualized impacts of smoking on the body by pinpointing the health factors most closely linked to smoking status.
 keywords: [health, data science, public health, tobbacco use]
 thanks: Thanks to everyone for checking this out.
 reference-section-title: References
@@ -38,11 +38,11 @@ Using various health indicator information classification models are utilized to
 
 # Description of Data
 
-The data for this project was collected from an online competition hosted on the Kaggle website called, "Binary Prediction of Smoker Status using Bio-Signals" @noauthor_binary_nodate. The training data was generated from a deep learning model that was generated from the "Smoker Status Prediction using Bio-Signals" data set @noauthor_smoker_nodate. The data set consist of 22 different predictors that range from age and height to health indicators like cholesterol level, hemoglobin and systolic pressure.
+The data for this project was collected from an online competition hosted on the Kaggle website called, "Binary Prediction of Smoker Status using Bio-Signals" @noauthor_binary_nodate. The training data was generated from a deep learning model that was generated from the "Smoker Status Prediction using Bio-Signals" data set @noauthor_smoker_nodate. The data set consist of 22 different predictors that range from age and height to health indicators like cholesterol level, hemoglobin and systolic pressure. The predictors are also numeric so while preparing the data for processing variables with zero variance were removed and were standardized, although the data overall was well prepared and easy to work with.
 
 # Model Description and Fit
 
-Using the training data set three different models were created which include a generalized linear mode, classification model with ridge penalty, and a classification model with lass penalty. Despite the use of different models there did not appear to be significant difference in model performance. The way the models were evaluated was through the use of the Log Loss and AROC to evaluate the models, with the results that can be seen below. Aftet
+Using the training data set three different models were created which include a generalized linear mode, classification model with ridge penalty, and a classification model with lass penalty. Despite the use of different models there did not appear to be significant difference in model performance. The way the models were evaluated was through the use of the Log Loss and AROC to evaluate the models, with the results that can be seen below.
 
 | Model                                   | Log Loss  | AROC      |
 |-----------------------------------------|-----------|-----------|
@@ -54,11 +54,15 @@ Using the training data set three different models were created which include a 
 
 Log Loss was chosen since it highly penalizes incorrect predictions, as the models were created to classify whether predictors indicated a non-Smoker vs. a Smoker. AROC however, was chosen because 1) the Kaggle competition the data set came from utilized AROC to evaluate performance 2) in addition to its particular success at evaluation binary classification models since it measures the probability distribution of false and true positives.
 
+Since there was no significant difference in model performance the ridge penalty model was chosen when doing further evaluation of performance and when determining which variables were most influential in outcome.
+
 # Data Visualization
 
-![](images/logisticridge-01.png)
+After creating the Classification Models with Ridge and Lasso Penalties, respectively they were plotted to asses results.
 
-![](images/logistic_lasso.png)
+![Results of Classification Model with Ridge Penalty](http://127.0.0.1:24175/chunk_output/s/2BC0AE1E/cuzq106m0pw5v/000010.png?resize=45)
+
+![Results of Classification Model with Lasso Penalty](http://127.0.0.1:24175/chunk_output/s/2BC0AE1E/cadwz7fndgf5h/000010.png)
 
 # Conclusion
 

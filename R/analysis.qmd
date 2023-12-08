@@ -224,3 +224,33 @@ auc(cut.obj)
 ```{r}
 caret_logistic_lasso$results[44,]
 ```
+
+```{r}
+options(scipen=99)
+coefs <- coef(caret_logistic_ridge$finalModel, caret_logistic_ridge$bestTune$lambda)
+coefs
+```
+
+```{r}
+# Rank order the predictors based on the magnitude of the coefficients
+
+ind   <- order(abs(coefs),decreasing=T)
+
+# The first 3 predictors with the largest absolute coefficient (excluding the intercept)
+
+head(as.matrix(coefs[ind[-1],]),4)
+```
+
+```{r}
+options(scipen=99)
+coefs <- coef(caret_logistic_lasso$finalModel, caret_logistic_lasso$bestTune$lambda)
+coefs
+
+# Rank order the predictors based on the magnitude of the coefficients
+
+ind   <- order(abs(coefs),decreasing=T)
+
+# The first 3 predictors with the largest absolute coefficient (excluding the intercept)
+
+head(as.matrix(coefs[ind[-1],]),4)
+```
