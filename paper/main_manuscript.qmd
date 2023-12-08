@@ -1,8 +1,8 @@
 ---
 title: "Using Bio Signals to Predict Smoker Status"
-shorttitle: "Paper"
+shorttitle: "Predicting Smoker Status"
 abstract: An Abstract
-keywords: [health, data science]
+keywords: [health, data science, public health, tobbacco use]
 thanks: Thanks to everyone for checking this out.
 reference-section-title: References
 bibliography: ../bibliography/project.bib
@@ -32,15 +32,15 @@ source(here("utils","functions.R"))
 
 # Introduction
 
-Using various health indicator information classification models are utilized to predict smoker status. As it stands more than 16 million american are currently living with a disease that can be linked to smoking @noauthor_health_2022. The use of a model like this is application in public health especially when identifying links between certain bio signals and smoking status.
+Using various health indicator information classification models are utilized to predict smoker status. As it stands more than 16 million american are currently living with a disease that can be linked to smoking @noauthor_health_2022. The use of a model like this is useful in public health especially when identifying links between certain bio signals and smoking status. It could lead to a better understanding of individual effects smoking has on the body due to identifying which health factors are most closely associated with smoking status.
 
 # Description of Data
 
 The data for this project was collected from an online competition hosted on the Kaggle website called, "Binary Prediction of Smoker Status using Bio-Signals" @noauthor_binary_nodate. The training data was generated from a deep learning model that was generated from the "Smoker Status Prediction using Bio-Signals" data set @noauthor_smoker_nodate. The data set consist of 22 different predictors that range from age and height to health indicators like cholesterol level, hemoglobin and systolic pressure.
 
-# Model Description
+# Model Description and Fit
 
-Using the training data set three different models were created which include a generalized linear mode
+Using the training data set three different models were created which include a generalized linear mode, classification model with ridge penalty, and a classification model with lass penalty. Despite the use of different models there did not appear to be siginifcant difference in model performance. The way the models were evaluated was through the use of the Log Loss and AROC to evaluate the models, with the results that can be seen below.
 
 | Model                                   | Log Loss  | AROC      |
 |-----------------------------------------|-----------|-----------|
@@ -49,6 +49,8 @@ Using the training data set three different models were created which include a 
 | Classification Model with Lasso Penalty | 0.4919702 | 0.8382552 |
 
 : Model Performance Evaluation
+
+Log Loss was chosen since it highly penalizes incorrect predictions, as the models were created to classify whether predictors indicated a non-Smoker vs. a Smoker. AROC however, was chosen because 1) the Kaggle competition the data set came from utilized AROC to evaluate performance 2) in addition to its particular success at evaluation binary classification models since it measues the probability distribution of false and true positives.
 
 # Data Visualization
 
