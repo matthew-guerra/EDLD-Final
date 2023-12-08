@@ -6,8 +6,135 @@ title: "Research Analysis Notebook"
 #| label: setup
 #| include: false
 library(here)
+library(recipes)
+library(caret)
 source(here("utils","check_packages.R"))
 source(here("utils","functions.R"))
 ```
 
-This quarto doc is used to analyze the data.
+```{r}
+#load in data
+load(here("data","data_constructed","analytical_data.RData"))
+
+train_data$smoking <- factor(ifelse(train_data$smoking == 0, "non_Smoking", "Smoking"))
+
+
+#blueprint
+
+blueprint <- recipe(
+  x = train_data,
+  vars = colnames(train_data),
+  roles = c('ID', rep('predictor', 22), 'outcome'))
+blueprint
+```
+
+```{r}
+# Randomly shuffle the training dataset
+
+  set.seed(11042022) # for reproducibility
+
+  train_data = train_data[sample(nrow(train_data)),]
+
+# Create 10 folds with equal size
+
+  folds = cut(seq(1,nrow(train_data)),breaks=10,labels=FALSE)
+  
+# Create the list for each fold 
+      
+  my.indices <- vector('list',10)
+
+  for(i in 1:10){
+    my.indices[[i]] <- which(folds!=i)
+  }
+```
+
+```{r}
+cv <- trainControl(method          = "cv",
+                   index           = my.indices,
+                   classProbs      = TRUE,
+                   summaryFunction = mnLogLoss)
+```
+
+```{r}
+caret_mod <- caret::train(blueprint, 
+                          data      = train_data, 
+                          method    = "glm",
+                          family    = 'binomial',
+                          metric    = 'logLoss',
+                          trControl = cv)
+
+caret_mod
+```
+
+```{r}
+
+```
+
+```{r}
+#read in test data
+
+test_data <- read.csv("~/EDLD Final/Smoker Status Using Bio-Signals/data/data_raw/test.csv")
+
+# performance evaluation
+predicted_test <- predict(caret_mod, test_data, type='response')
+
+dim(predicted_test)
+```
+
+```{r}
+head(predicted_test)
+```
+
+```{r}
+install.packages("cutpointr")
+require(cutpointr)
+```
+
+```{r}
+# Compute the AUC/AROC/ROC
+
+cut.obj <- cutpointr(x     = predicted_test$Smoking,
+                     class = test_data$smoking)
+
+auc(cut.obj)
+```
+
+```{r}
+# Hyperparameter tuning grid for ridge penalty (lambda), alpha = 0
+
+grid <- data.frame(alpha = 0, lambda = c(seq(0,.001,.00001),.005,.01,.05,.1)) 
+grid
+```
+
+```{r}
+Sys.time()
+
+caret_logistic_ridge <- caret::train(blueprint, 
+                                     data      = train_data, 
+                                     method    = "glmnet",
+                                     family    = 'binomial',
+                                     metric    = 'logLoss',
+                                     trControl = cv,
+                                     tuneGrid  = grid)
+
+Sys.time()
+```
+
+```{r}
+#| label: fig-logisticridge
+plot(caret_logistic_ridge)
+```
+
+```{r}
+# Optimal lambda penalty
+
+caret_logistic_ridge$bestTune
+```
+
+```{r}
+predicted_te <- predict(caret_logistic_ridge, test_data, type='response')
+
+dim(predicted_te)
+
+head(predicted_te)
+```

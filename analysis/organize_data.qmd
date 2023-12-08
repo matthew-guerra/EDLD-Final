@@ -10,4 +10,17 @@ source(here("utils","check_packages.R"))
 source(here("utils","functions.R"))
 ```
 
-This quarto doc is used to organize the data.
+```{r}
+train_data <- read.csv("~/EDLD Final/Smoker Status Using Bio-Signals/data/data_raw/train.csv")
+```
+
+```{r}
+save(train_data, file=here("data","data_constructed"
+                                ,"analytical_data.RData"))
+```
+
+```{r}
+
+```
+
+s

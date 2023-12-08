@@ -38,6 +38,12 @@ This quarto doc is for writing the manuscript. This is a test citation [@alba199
 
 # Data and Methods
 
+haiweiwurwruiowueqrioeuqwioruiwq.
+
+rewrjewqirouqiwueriweq.
+
+weiquhroiquwioruwqor. @fig-logisticridge
+
 # Results
 
 # Conclusions
