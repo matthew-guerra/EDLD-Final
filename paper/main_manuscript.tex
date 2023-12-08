@@ -313,7 +313,7 @@ health\sep data science\sep public health\sep
 tobbacco use
 \end{keywords}
 %\noindent \rule{\linewidth}{.5pt}
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, breakable, boxrule=0pt, sharp corners, interior hidden, borderline west={3pt}{0pt}{shadecolor}, enhanced]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, interior hidden, frame hidden, borderline west={3pt}{0pt}{shadecolor}, sharp corners, boxrule=0pt, breakable]}{\end{tcolorbox}}\fi
 
 \href{https://github.com/matthew-guerra/EDLD-Final}{Github Repository}
 
@@ -341,7 +341,10 @@ from a deep learning model that was generated from the ``Smoker Status
 Prediction using Bio-Signals'' data set \emph{Smoker {Status}
 {Prediction} Using {Bio}-{Signals}} (n.d.). The data set consist of 22
 different predictors that range from age and height to health indicators
-like cholesterol level, hemoglobin and systolic pressure.
+like cholesterol level, hemoglobin and systolic pressure. The predictors
+are also numeric so while preparing the data for processing variables
+with zero variance were removed and were standardized, although the data
+overall was well prepared and easy to work with.
 
 \hypertarget{model-description-and-fit}{%
 \section{Model Description and Fit}\label{model-description-and-fit}}
@@ -352,7 +355,7 @@ penalty, and a classification model with lass penalty. Despite the use
 of different models there did not appear to be significant difference in
 model performance. The way the models were evaluated was through the use
 of the Log Loss and AROC to evaluate the models, with the results that
-can be seen below. Aftet
+can be seen below.
 
 \begin{longtable}[]{@{}lll@{}}
 \caption{Model Performance Evaluation}\tabularnewline
@@ -379,11 +382,16 @@ competition the data set came from utilized AROC to evaluate performance
 classification models since it measures the probability distribution of
 false and true positives.
 
+Since there was no significant difference in model performance the ridge
+penalty model was chosen when doing further evaluation of performance
+and when determining which variables were most influential in outcome.
+
 \hypertarget{data-visualization}{%
 \section{Data Visualization}\label{data-visualization}}
 
 After creating the Classification Models with Ridge and Lasso Penalties,
-respectively they were plotted to asses results as well as to view
+respectively they were plotted to asses the results of the models, in
+additon to seeing model fit.
 
 \begin{figure}[!t]
 
@@ -415,7 +423,17 @@ tissues. Triglycerides are a type of fat (or lipid) found within our
 blood and is often associated with obesity, stroke, heart disease and
 other serious illnesses \emph{Triglycerides} (n.d.). Y-GTP however, is
 associated with liver disease at higher levels especially when alcohol
-or other drugs are involved.
+or other drugs are involved. Considering the affects smoking has on your
+health the connection between these predictors and smoking status are
+not surprising and fall within what I expected. The practical findings
+of this project are minimal and more than likely would require more data
+and a more focused analysis of health indicators and their relationship
+with smoking status. However, it is clear that being able to predict
+certain health conditions or behaviors is useful in public health. I do
+not do a lot of work in public health or medical sociology but this
+project has made more curious about other projects like this especially
+when considering the ethics of implementing something like this into the
+healthcare system.
 
 \hypertarget{bibliography}{%
 \section*{References}\label{bibliography}}
