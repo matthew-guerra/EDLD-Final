@@ -1,7 +1,7 @@
 ---
 title: "Using Bio Signals to Predict Smoker Status"
 shorttitle: "Predicting Smoker Status"
-abstract: An Abstract
+abstract: 
 keywords: [health, data science, public health, tobbacco use]
 thanks: Thanks to everyone for checking this out.
 reference-section-title: References
@@ -30,6 +30,8 @@ source(here("utils","check_packages.R"))
 source(here("utils","functions.R"))
 ```
 
+[Github Repository](https://github.com/matthew-guerra/EDLD-Final)
+
 # Introduction
 
 Using various health indicator information classification models are utilized to predict smoker status. As it stands more than 16 million american are currently living with a disease that can be linked to smoking @noauthor_health_2022. The use of a model like this is useful in public health especially when identifying links between certain bio signals and smoking status. It could lead to a better understanding of individual effects smoking has on the body due to identifying which health factors are most closely associated with smoking status.
@@ -40,7 +42,7 @@ The data for this project was collected from an online competition hosted on the
 
 # Model Description and Fit
 
-Using the training data set three different models were created which include a generalized linear mode, classification model with ridge penalty, and a classification model with lass penalty. Despite the use of different models there did not appear to be siginifcant difference in model performance. The way the models were evaluated was through the use of the Log Loss and AROC to evaluate the models, with the results that can be seen below.
+Using the training data set three different models were created which include a generalized linear mode, classification model with ridge penalty, and a classification model with lass penalty. Despite the use of different models there did not appear to be significant difference in model performance. The way the models were evaluated was through the use of the Log Loss and AROC to evaluate the models, with the results that can be seen below. Aftet
 
 | Model                                   | Log Loss  | AROC      |
 |-----------------------------------------|-----------|-----------|
@@ -60,4 +62,4 @@ Log Loss was chosen since it highly penalizes incorrect predictions, as the mode
 
 # Conclusion
 
-@fig-logistic-lasso
+The three most important variables in predicting smoking status was hemoglobin, triglyceride, and y-GTP. Hemoglobin is a protein contained within red blood cells and is associated with proper oxygenation of tissues. Triglycerides are a type of fat (or lipid) found within our blood and is often associated with obesity, stroke, heart disease and other serious illnesses @noauthor_triglycerides_nodate. Y-GTP however, is associated with liver disease at higher levels especially when alcohol or other drugs are involved.
