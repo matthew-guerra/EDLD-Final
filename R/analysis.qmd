@@ -143,6 +143,12 @@ plot(caret_logistic_ridge)
 caret_logistic_ridge$bestTune
 ```
 
+aret_logistic_ridge\$results\[103,\]
+
+```{r}
+caret_logistic_ridge$results[103,]
+```
+
 ```{r}
 predicted_te <- predict(caret_logistic_ridge, test_data, type='prob')
 
@@ -188,4 +194,33 @@ Sys.time()
 ```{r}
 #| label: fig-logistic-lasso
 plot(caret_logistic_lasso)
+```
+
+```{r}
+# Optimal lambda penalty
+
+caret_logistic_lasso$bestTune
+
+```
+
+```{r}
+
+predicted_test_lasso <- predict(caret_logistic_lasso, test_data, type='prob')
+
+dim(predicted_test_lasso)
+
+head(predicted_test_lasso)
+```
+
+```{r}
+# Compute the AUC
+
+cut.obj <- cutpointr(x     = predicted_test_lasso$Smoking,
+                     class = test_data$smoking)
+
+auc(cut.obj)
+```
+
+```{r}
+caret_logistic_lasso$results[44,]
 ```

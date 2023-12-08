@@ -23,4 +23,3 @@ save(train_data, file=here("data","data_constructed"
 
 ```
 
-s

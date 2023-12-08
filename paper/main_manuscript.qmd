@@ -44,19 +44,19 @@ Using the training data set three different models were created which include a 
 
 | Model                                   | Log Loss  | AROC      |
 |-----------------------------------------|-----------|-----------|
-| GLM                                     | 0.491946  | 0.8383444 |
-| Classification Model with Ridge Penalty | 0.4951833 | 0.8350144 |
-| Classification Model with Lasso Penalty | 0.4919702 | 0.8382552 |
+| GLM                                     | 0.4912959 | 0.8421145 |
+| Classification Model with Ridge Penalty | 0.4945809 | 0.8396281 |
+| Classification Model with Lasso Penalty | 0.4913238 | 0.8420534 |
 
 : Model Performance Evaluation
 
-Log Loss was chosen since it highly penalizes incorrect predictions, as the models were created to classify whether predictors indicated a non-Smoker vs. a Smoker. AROC however, was chosen because 1) the Kaggle competition the data set came from utilized AROC to evaluate performance 2) in addition to its particular success at evaluation binary classification models since it measues the probability distribution of false and true positives.
+Log Loss was chosen since it highly penalizes incorrect predictions, as the models were created to classify whether predictors indicated a non-Smoker vs. a Smoker. AROC however, was chosen because 1) the Kaggle competition the data set came from utilized AROC to evaluate performance 2) in addition to its particular success at evaluation binary classification models since it measures the probability distribution of false and true positives.
 
 # Data Visualization
 
-![](http://127.0.0.1:24175/chunk_output/C9D5DE8C5850fe96/200AEF54/crgatsmq5j8le/000012.png?resize=16)
+![](images/logisticridge-01.png)
 
-![](http://127.0.0.1:24175/chunk_output/C9D5DE8C5850fe96/200AEF54/cdt7usfox7pdg/000014.png?resize=15)
+![](images/logistic_lasso.png)
 
 # Conclusion
 
