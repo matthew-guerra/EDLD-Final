@@ -6,7 +6,7 @@ keywords: [health, data science]
 thanks: Thanks to everyone for checking this out.
 reference-section-title: References
 bibliography: ../bibliography/project.bib
-csl: ../bibliography/chicago-parenthetical.csl
+csl: ../bibliography/apa.csl
 format:
   aog-article-pdf:
     keep-tex: false
@@ -32,18 +32,26 @@ source(here("utils","functions.R"))
 
 # Introduction
 
-This quarto doc is for writing the manuscript. This is a test citation [@alba1990].
+Using various health indicator information classification models are utilized to predict smoker status. As it stands more than 16 million american are currently living with a disease that can be linked to smoking @noauthor_health_2022. The use of a model like this is application in public health especially when identifying links between certain bio signals and smoking status.
 
-# Background
+# Description of Data
 
-# Data and Methods
+The data for this project was collected from an online competition hosted on the Kaggle website called, "Binary Prediction of Smoker Status using Bio-Signals" @noauthor_binary_nodate. The training data was generated from a deep learning model that was generated from the "Smoker Status Prediction using Bio-Signals" data set @noauthor_smoker_nodate. The data set consist of 22 different predictors that range from age and height to health indicators like cholesterol level, hemoglobin and systolic pressure.
 
-haiweiwurwruiowueqrioeuqwioruiwq.
+# Model Description
 
-rewrjewqirouqiwueriweq.
+Using the training data set three different models were created which include a generalized linear mode
 
-weiquhroiquwioruwqor. @fig-logisticridge
+| Model                                   | Log Loss  | AROC      |
+|-----------------------------------------|-----------|-----------|
+| GLM                                     | 0.491946  | 0.8383444 |
+| Classification Model with Ridge Penalty | 0.4951833 | 0.8350144 |
+| Classification Model with Lasso Penalty | 0.4919702 | 0.8382552 |
 
-# Results
+: Model Performance Evaluation
 
-# Conclusions
+# Data Visualization
+
+# Conclusion
+
+@fig-logistic-lasso
