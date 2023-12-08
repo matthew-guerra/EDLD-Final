@@ -54,16 +54,12 @@ Using the training data set three different models were created which include a 
 
 Log Loss was chosen since it highly penalizes incorrect predictions, as the models were created to classify whether predictors indicated a non-Smoker vs. a Smoker. AROC however, was chosen because 1) the Kaggle competition the data set came from utilized AROC to evaluate performance 2) in addition to its particular success at evaluation binary classification models since it measures the probability distribution of false and true positives.
 
-Since there was no significant difference in model performance the ridge penalty model was chosen when doing further evaluation of performance and when determining which variables were most influential in outcome.
+Since there was no significant difference in model performance the ridge penalty model was chosen when doing further evaluation of performance and when determining which variables were most influential in outcome. After creating the Classification Models with Ridge and Lasso Penalties, respectively they were plotted to asses the results of the models, in addition to seeing model fit.
 
-# Data Visualization
+![](images/logisticridge.pdf)
 
-After creating the Classification Models with Ridge and Lasso Penalties, respectively they were plotted to asses the results of the models, in additon to seeing model fit.
-
-![Results of Classification Model with Ridge Penalty](http://127.0.0.1:24175/chunk_output/s/2BC0AE1E/cuzq106m0pw5v/000010.png?resize=45)
-
-![Results of Classification Model with Lasso Penalty](http://127.0.0.1:24175/chunk_output/s/2BC0AE1E/cadwz7fndgf5h/000010.png)
+![](images/logistic_lasso.pdf)
 
 # Conclusion
 
-The three most important variables in predicting smoking status was hemoglobin, triglyceride, and y-GTP. Hemoglobin is a protein contained within red blood cells and is associated with proper oxygenation of tissues. Triglycerides are a type of fat (or lipid) found within our blood and is often associated with obesity, stroke, heart disease and other serious illnesses @noauthor_triglycerides_nodate. Y-GTP however, is associated with liver disease at higher levels especially when alcohol or other drugs are involved. Considering the affects smoking has on your health the connection between these predictors and smoking status are not surprising and fall within what I expected. The practical findings of this project are minimal and more than likely would require more data and a more focused analysis of health indicators and their relationship with smoking status. However, it is clear that being able to predict certain health conditions or behaviors is useful in public health. I do not do a lot of work in public health or medical sociology but this project has made more curious about other projects like this especially when considering the ethics of implementing something like this into the healthcare system.
+The three most important variables in predicting smoking status was hemoglobin, triglyceride, and y-GTP. Hemoglobin is a protein contained within red blood cells and is associated with proper oxygenation of tissues. Triglycerides are a type of fat (or lipid) found within our blood and is often associated with obesity, stroke, heart disease and other serious illnesses @noauthor_triglycerides_nodate. Y-GTP however, is associated with liver disease at higher levels especially when alcohol or other drugs are involved. Considering the affects smoking has on your health the connection between these predictors and smoking status are not surprising and fall within what I expected. The practical findings of this project are minimal and more than likely would require more data and a more focused analysis of health indicators and their relationship with smoking status. However, it is clear that being able to predict cerain health conditions or behaviors is useful in public health. I do not do a lot of work in public health or medical sociology but this project has made more curious about other projects like this especially when considering the ethics of implementing something like this into the healthcare system.
