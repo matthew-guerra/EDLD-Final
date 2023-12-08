@@ -1,8 +1,8 @@
 ---
-title: "Paper Manuscript"
+title: "Using Bio Signals to Predict Smoker Status"
 shorttitle: "Paper"
 abstract: An Abstract
-keywords: [keyword1, keyword2]
+keywords: [health, data science]
 thanks: Thanks to everyone for checking this out.
 reference-section-title: References
 bibliography: ../bibliography/project.bib
